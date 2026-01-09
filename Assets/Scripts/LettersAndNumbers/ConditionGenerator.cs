@@ -603,7 +603,7 @@ public class ConditionGenerator
 						{
 							if (validConditional(locations, c1, i, FEWER, c2, j, FEWER))
 							{
-								string message = "Any " + locName + " that contains " + i + " or fewer " + c1 + "s must also contain " + j + " or fewer + " + c2 + "s";
+								string message = "Any " + locName + " that contains " + i + " or fewer " + c1 + "s must also contain " + j + " or fewer " + c2 + "s";
 								conditions.Add(new CDConditional(message, locID, c1 + "" + c1, i, FEWER, c2 + "" + c2, j, FEWER, CONDITIONAL));
 							}
 						}

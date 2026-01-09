@@ -42,8 +42,9 @@ public class LettersAndNumbers : MonoBehaviour {
 	int pageNum = 0;
 
 	private int NUM_MOVABLE_SPACES = 5;
+	List<int> movableSpaces;
 
-	void Awake()
+    void Awake()
 	{
 		moduleId = moduleIdCounter++;
 
@@ -51,7 +52,7 @@ public class LettersAndNumbers : MonoBehaviour {
 		List<int[]> combos = new List<int[]>();
 		getAllCombos(NUM_MOVABLE_SPACES, new int[0], combos);
 		combos.RemoveAt(0);
-		List<int> movableSpaces = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+		movableSpaces = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 		movableSpaces.Shuffle();
 		while (movableSpaces.Count > NUM_MOVABLE_SPACES)
 			movableSpaces.RemoveAt(0);
@@ -170,8 +171,8 @@ public class LettersAndNumbers : MonoBehaviour {
 		cycleDown.OnInteract = null;
 		if(prevPressed >= 0)
 		{
-			gridMesh[prevPressed].material = gridMats[0];
-			gridText[prevPressed].color = Color.white;
+			gridMesh[prevPressed].material = gridMats[1];
+			gridText[prevPressed].color = Color.black;
 			prevPressed = -1;
 		}
 		GridObj grid = new GridObj(gridText);
@@ -223,7 +224,7 @@ public class LettersAndNumbers : MonoBehaviour {
 			cycleUp.OnInteract = delegate { audio.PlaySoundAtTransform(cycleSFX[1].name, transform); pageNum = mod(pageNum - 1, conditionText.Count); screenText.text = conditionText[pageNum]; pageText.text = (pageNum + 1) + "/" + conditionText.Count; return false; };
 			cycleDown.OnInteract = delegate { audio.PlaySoundAtTransform(cycleSFX[0].name, transform); pageNum = mod(pageNum + 1, conditionText.Count); screenText.text = conditionText[pageNum]; pageText.text = (pageNum + 1) + "/" + conditionText.Count; return false; };
 			screen.OnInteract = delegate { StartCoroutine(pressedScreen()); return false; };
-			foreach (int index in indexes)
+			foreach (int index in movableSpaces)
 				gridButtons[index].OnInteract = delegate { pressedButton(index); return false; };
 			pageNum = 0;
 			screenText.text = conditionText[pageNum];
