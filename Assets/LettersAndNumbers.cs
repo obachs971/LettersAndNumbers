@@ -163,7 +163,7 @@ public class LettersAndNumbers : MonoBehaviour {
 	}
 	private IEnumerator pressedScreen()
 	{
-		yield return new WaitForSeconds(0f);
+		yield return null;
 		foreach (KMSelectable gridButton in gridButtons)
 			gridButton.OnInteract = null;
 		screen.OnInteract = null;
@@ -302,6 +302,8 @@ public class LettersAndNumbers : MonoBehaviour {
 		else if (Regex.IsMatch(param[0], @"^\s*SUBMIT\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) && param.Length == 1)
 		{
 			yield return null;
+			yield return "strike";
+			yield return "solve";
 			screen.OnInteract();
 		}
 		else
